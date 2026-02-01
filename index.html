@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person</title>
+    <style>
+        :root {
+            --pink-light: #fce4ec;
+            --pink-medium: #f8bbd0;
+            --accent-pink: #ff85a2;
+            --dark-pink: #f06292;
+        }
+
+        body {
+            /* This mimics your screenshots: Pink gradient with kiss pattern */
+            background: var(--pink-light);
+            background-image: linear-gradient(to bottom, #fce4ec, #f8bbd0), 
+                              url('https://www.transparenttextures.com/patterns/kiss.png');
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Top Navigation Tabs */
+        .navbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            width: 100%;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            color: #888;
+        }
+        .navbar span { cursor: pointer; transition: 0.3s; }
+        .navbar span.active { color: var(--dark-pink); border-bottom: 2px solid var(--dark-pink); }
+
+        /* Card Container */
+        .card {
+            background: rgba(255, 255, 255, 0.7); /* Translucent white to show bg pattern */
+            width: 90%;
+            max-width: 450px;
+            margin: 50px 0;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        .hidden { display: none; }
+
+        /* Images & Stickers */
+        .sticker { width: 150px; margin-bottom: 20px; border-radius: 10px; }
+
+        /* Buttons */
+        .btn-group { display: flex; justify-content: center; gap: 15px; margin-top: 25px; position: relative; }
+        
+        button {
+            background: var(--accent-pink);
+            color: white; border: none; padding: 12px 28px;
+            border-radius: 50px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 133, 162, 0.3);
+            transition: 0.3s;
+        }
+        button:hover { background: var(--dark-pink); transform: translateY(-3px); }
+
+        #no-btn { transition: 0.2s; z-index: 10; }
+
+        /* Special Page Layouts */
+        .gift-container { display: flex; justify-content: center; gap: 20px; }
+        .gift-box { font-size: 50px; cursor: pointer; transition: 0.3s; }
+        .gift-box:hover { transform: scale(1.2); }
+
+        /* Collage */
+        .collage { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .collage img { width: 100%; border-radius: 10px; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/mcrn2y.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="navbar" id="nav">
+        <span onclick="goTo(1)">Page 1</span> <span onclick="goTo(2)">Page 2</span>
+        <span onclick="goTo(3)">Page 3</span> <span onclick="goTo(4)">Page 4</span>
+        <span onclick="goTo(5)">Page 5</span> <span onclick="goTo(6)">Page 6</span>
+        <span onclick="goTo(7)">Page 7</span> <span onclick="goTo(8)">Page 8</span>
+        <span onclick="goTo(9)">Page 9</span> <span onclick="goTo(10)">Page 10</span>
+        <span onclick="goTo(11)">Page 11</span> <span onclick="goTo(12)">Page 12</span>
+        <span onclick="goTo(13)">Page 13</span> <span onclick="goTo(14)">Page 14</span>
+        <span onclick="goTo(15)">Page 15</span>
+    </div>
+
+    <div id="p1" class="card">
+        <img src="https://media.tenor.com/Ef97-Y_V6m8AAAAi/milk-and-mocha-bear-couple.gif" class="sticker">
+        <h2>Hey! I made something for you...</h2>
+        <p>Do you wanna see it? ✨</p>
+        <button onclick="startExperience()">Yes, show me!</button>
+    </div>
+
+    <div id="p2" class="card hidden">
+        <img src="https://media.tenor.com/Z4O8m7B8m60AAAAi/mocha-milk.gif" class="sticker">
+        <h2>Would you like to be mine?</h2>
+        <div class="btn-group">
+            <button onclick="goTo(3)">How can I say no?</button>
+            <button id="no-btn" onmouseover="moveNo()">No... I'm good</button>
+        </div>
+    </div>
+
+    <div id="p3" class="card hidden">
+        <img src="https://media.tenor.com/vH97N0p0_6oAAAAi/milk-and-mocha.gif" class="sticker">
+        <h2>THAT'S LIKE MY GIRL! ❤️</h2>
+        <button onclick="goTo(4)">Next</button>
+    </div>
+
+    <div id="p4" class="card hidden">
+        <h2>YAYAYAYAY MY KUCHU PUCHU</h2>
+        <p>Choose a gift box!</p>
+        <div class="gift-container">
+            <div class="gift-box" onclick="goTo(5)">🎁</div>
+            <div class="gift-box" onclick="alert('You got a huge virtual hug! 🤗')">🎁</div>
+            <div class="gift-box" onclick="alert('You got 1000 virtual kisses! 💋')">🎁</div>
+        </div>
+    </div>
+
+    <div id="p5" class="card hidden">
+        <img src="https://i.ibb.co/L6S9zFh/bouquet.png" style="width: 200px;">
+        <p>This virtual bouquet is for you. Thank you for being in my life.</p>
+        <button onclick="goTo(6)">Next Page</button>
+    </div>
+
+    <div id="p6" class="card hidden"><h2>Page 6: Our First Memory</h2><p>Insert text here...</p><button onclick="goTo(7)">Next</button></div>
+    <div id="p7" class="card hidden"><h2>Page 7: Soulmate</h2><div class="collage"><img src="https://via.placeholder.com/150"><img src="https://via.placeholder.com/150"></div><button onclick="goTo(8)">Next</button></div>
+    <div id="p8" class="card hidden"><h2>Page 8: Insert Text</h2><button onclick="goTo(9)">Next</button></div>
+    <div id="p9" class="card hidden"><h2>Page 9: Insert Text</h2><button onclick="goTo(10)">Next</button></div>
+    <div id="p10" class="card hidden"><h2>Page 10: Insert Text</h2><button onclick="goTo(11)">Next</button></div>
+    <div id="p11" class="card hidden"><h2>Page 11: Insert Text</h2><button onclick="goTo(12)">Next</button></div>
+    <div id="p12" class="card hidden"><h2>Page 12: Insert Text</h2><button onclick="goTo(13)">Next</button></div>
+    <div id="p13" class="card hidden"><h2>Page 13: Insert Text</h2><button onclick="goTo(14)">Next</button></div>
+    <div id="p14" class="card hidden"><h2>Page 14: Almost there...</h2><button onclick="goTo(15)">Final Surprise</button></div>
+
+    <div id="p15" class="card hidden">
+        <h2>My Dearest Kuchu Puchu,</h2>
+        <p style="text-align: left; line-height: 1.6;">
+           heyy!! vaishuu
+          well u saw everything alr hehehe i hope u loved it and i js wannna say that talking to u feels very special infact you are special to me
+          and i love ur smile, i love what u do, i love for what u are, i love u for being honest with me, ur the sweetest girl i have ever talked to and what i feel for u 
+          is something even I dont know but i would love to find out more abt u and spend my time with u and i wish we stay together forever 
+          your lover
+          ayush
+
+    
+        </p>
+        <img src="https://media.tenor.com/vH97N0p0_6oAAAAi/milk-and-mocha.gif" width="100">
+        <h3>I Love You Always! ❤️</h3>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+
+        function startExperience() {
+            music.play(); // Music starts on first interaction
+            goTo(2);
+        }
+
+        function goTo(pageNum) {
+            document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+            document.getElementById('p' + pageNum).classList.remove('hidden');
+            
+            // Highlight current tab
+            document.querySelectorAll('.navbar span').forEach((span, index) => {
+                span.classList.toggle('active', index === (pageNum - 1));
+            });
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('no-btn');
+            // Move button to a random spot within the card
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    </script>
+</body>
+</html>
